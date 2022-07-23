@@ -16,4 +16,51 @@ class SuperPowerGenerator
     }
 }
 
+abstract class Warrior
+{
+    public int Life { get; set; } = 100;
+    public int Armour { get; set; }
+    public int Power { get; set; }
+}
+
+class Human: Warrior
+{
+   public Human(int armour = 10, int power = 10)
+   {
+        Armour = armour;
+        Power = power;
+   }
+
+}
+
+class Elf : Warrior
+{
+    public Elf(int armour = 5, int power = 15)
+    {
+        Armour = armour;
+        Power = power;
+    }
+
+}
+
+class Dwarf : Warrior
+{
+    public Dwarf(int armour = 15, int power = 5)
+    {
+        Armour = armour;
+        Power = power;
+    }
+
+}
+
+class Orc : Warrior
+{
+    public Orc(int armour = 5, int power = 15)
+    {
+        Armour = armour;
+        Power = power;
+    }
+
+}
+
 
