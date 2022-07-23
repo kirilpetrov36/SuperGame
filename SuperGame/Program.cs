@@ -21,6 +21,7 @@ abstract class Warrior
     public int Life { get; set; } = 100;
     public int Armour { get; set; }
     public int Power { get; set; }
+    public virtual void AddSuperPower(AddSuperPower addSuperPower, int amount) {}
 }
 
 class Human: Warrior
@@ -41,6 +42,10 @@ class Elf : Warrior
         Power = power;
     }
 
+    public override void AddSuperPower(AddSuperPower addSuperPower, int amount) {
+        addSuperPower.AddSuperPower(this, amount);
+    }
+
 }
 
 class Dwarf : Warrior
@@ -49,6 +54,11 @@ class Dwarf : Warrior
     {
         Armour = armour;
         Power = power;
+    }
+
+    public override void AddSuperPower(AddSuperPower addSuperPower, int amount)
+    {
+        addSuperPower.AddSuperPower(this, amount);
     }
 
 }
@@ -60,7 +70,38 @@ class Orc : Warrior
         Armour = armour;
         Power = power;
     }
+    public override void AddSuperPower(AddSuperPower addSuperPower, int amount)
+    {
+        addSuperPower.AddSuperPower(this, amount);
+    }
 
 }
 
+interface AddSuperPower
+{
+    void AddSuperPower(Warrior person, int amount);
+}
 
+class AddLife : AddSuperPower
+{
+    public void AddSuperPower(Warrior person, int amount)
+    {
+        person.Life += amount;
+    }
+}
+
+class AddArmour : AddSuperPower
+{
+    public void AddSuperPower(Warrior person, int amount)
+    {
+        person.Armour += amount;
+    }
+}
+
+class AddPower : AddSuperPower
+{
+    public void AddSuperPower(Warrior person, int amount)
+    {
+        person.Power += amount;
+    }
+}
