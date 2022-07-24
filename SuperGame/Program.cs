@@ -1,15 +1,55 @@
 ﻿string[] races = new string[] { "Human", "Elf", "Dwarf", "Orc" };
+
 Console.WriteLine("Choose a 1-st warrior:");
 Console.WriteLine("Human - 1");
 Console.WriteLine("Elf - 2");
 Console.WriteLine("Dwarf - 3");
 Console.WriteLine("Orc - 4");
-string? firstPlayer = Console.ReadLine();
-Console.WriteLine($"First warrior - {races[Int32.Parse(firstPlayer!) - 1]}");
-Console.WriteLine("Choose a 2-nd warrior:");
-string? secondPlayer = Console.ReadLine();
-Console.WriteLine($"First warrior - {races[Int32.Parse(secondPlayer!) - 1]}");
 
+string? firstPlayerRace = Console.ReadLine();
+Console.WriteLine($"1-st warrior created - {races[Int32.Parse(firstPlayerRace!) - 1]}");
+Console.WriteLine();
+
+Console.WriteLine("Choose a 2-nd warrior:");
+string? secondPlayerRace = Console.ReadLine();
+Console.WriteLine($"2-nd warrior created - {races[Int32.Parse(secondPlayerRace!) - 1]}");
+Console.WriteLine();
+
+Warrior firstPlayer = Warrior.Create(firstPlayerRace!);         //create first player
+Warrior secondPlayer = Warrior.Create(secondPlayerRace!);       //create second player
+
+int firstSuperPower = SuperPowerGenerator.SuperPowerAmount();   // generate SuperPower value for the first player
+int secondSuperPower = SuperPowerGenerator.SuperPowerAmount();  // generate SuperPower value for the second player
+
+Console.WriteLine($"Random value for the first player is generated - {firstSuperPower}");
+Console.WriteLine("Choose what SuperPower you want to boost: ");
+Console.WriteLine("Life - 1");
+Console.WriteLine("Armour - 2");
+Console.WriteLine("Power - 3");
+string? firstSuperPowerToBoost = Console.ReadLine();            // ask first player what SuperPower he wants to boost
+firstPlayer.Boost(firstSuperPower, firstSuperPowerToBoost!);    // boost first player SuperPower
+Console.WriteLine("SuperPower has been boosted successfully");
+Console.WriteLine();
+
+Console.WriteLine($"Random value for the second player is generated - {secondSuperPower}");
+Console.WriteLine("Choose what SuperPower you want to boost: ");
+string? secondSuperPowerToBoost = Console.ReadLine();           // ask second player what SuperPower he wants to boost
+secondPlayer.Boost(secondSuperPower, secondSuperPowerToBoost!);  // boost second player SuperPower
+Console.WriteLine("SuperPower has been boosted successfully");
+Console.WriteLine();
+
+Console.WriteLine("1-st player SuperPowers:");
+Console.WriteLine($"Life - {firstPlayer.Life}");
+Console.WriteLine($"Armour - {firstPlayer.Armour}");
+Console.WriteLine($"Power - {firstPlayer.Power}");
+Console.WriteLine();
+Console.WriteLine("2-nd player SuperPowers:");
+Console.WriteLine($"Life - {secondPlayer.Life}");
+Console.WriteLine($"Armour - {secondPlayer.Armour}");
+Console.WriteLine($"Power - {secondPlayer.Power}");
+Console.WriteLine();
+
+Scene.Fight(firstPlayer, secondPlayer);
 
 // 1-st task
 class SuperPowerGenerator
@@ -48,8 +88,8 @@ abstract class Warrior
 
     public void Protect(double attackAmount)
     {
-        if (Armour >= (attackAmount/2)) {
-            attackAmount /= 2;
+        if (Armour >= (attackAmount/2.0)) {
+            attackAmount /= 2.0;
             Armour -= attackAmount;       
         }
         
@@ -58,7 +98,44 @@ abstract class Warrior
 
     public double Attack()
     {
-        return Power;
+        if (Armour > 0) 
+        { 
+            return Power;
+        }
+        else
+        {
+            Power--;
+            return Power;
+        }
+    }
+
+    public static Warrior Create(string race)
+    {
+        switch (race)
+        {
+            case "1": return new Human();
+            case "2": return new Elf();
+            case "3": return new Dwarf();
+            case "4": return new Orc();
+            default: throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void Boost(int powerAmount, string choosePower)
+    {
+        switch (choosePower)
+        {
+            case "1": 
+                Life += (double)powerAmount;
+                break;
+            case "2": 
+                Armour += (double)powerAmount;
+                break;
+            case "3": 
+                Power += (double)powerAmount;
+                break;
+            default: throw new ArgumentOutOfRangeException();
+        }
     }
 }
 
@@ -151,6 +228,50 @@ static class Scene
 {
     public static void Fight(Warrior firstPlayer, Warrior secondPlayer)
     {
+        int currentRound = 1;
+        while (true)
+        {
+            Console.WriteLine($"Round #{currentRound}");
+            Console.WriteLine();
+            if (currentRound % 2 == 1) {
+                Console.WriteLine("1-st player attacks 2-nd player");
+                double oldPower = firstPlayer.Power;
+                double oldLife = secondPlayer.Life;
+                double oldArmour = secondPlayer.Armour;
+                if (firstPlayer.Power > 0)
+                    secondPlayer.Protect(firstPlayer.Attack());
+                else
+                    Console.WriteLine("1-st player lost his power");
+                Console.WriteLine($"1-st player Power : {oldPower} -> {firstPlayer.Power} ");
+                Console.WriteLine($"2-nd player Life : {oldLife} -> {secondPlayer.Life} ");
+                Console.WriteLine($"2-nd player Armor : {oldArmour} -> {secondPlayer.Armour} ");
+            }
+            else {
+                Console.WriteLine("2-nd player attacks 1-st player");
+                double oldPower = secondPlayer.Power;
+                double oldLife = firstPlayer.Life;
+                double oldArmour = firstPlayer.Armour;
+                if (secondPlayer.Power > 0)
+                    firstPlayer.Protect(secondPlayer.Attack());
+                else
+                    Console.WriteLine("2-nd player lost his power");
+                Console.WriteLine($"2-nd player Power : {oldPower} -> {secondPlayer.Power} ");
+                Console.WriteLine($"1-st player Life : {oldLife} -> {firstPlayer.Life} ");
+                Console.WriteLine($"1-st player Armor : {oldArmour} -> {firstPlayer.Armour} ");
+            }
 
+            if (firstPlayer.Life <= 0 | ) {
+                Console.WriteLine();
+                Console.WriteLine("2-ND PLAYER HAS WON");
+                break; 
+            }
+            if (secondPlayer.Life <= 0 | ) {
+                Console.WriteLine();
+                Console.WriteLine("1-ST PLAYER HAS WON");
+                break; 
+            }
+
+            currentRound++;
+        }
     }
 }
