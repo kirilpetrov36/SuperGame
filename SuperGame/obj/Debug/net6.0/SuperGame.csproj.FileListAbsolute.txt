@@ -1,0 +1,15 @@
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\bin\Debug\net6.0\SuperGame.exe
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\bin\Debug\net6.0\SuperGame.deps.json
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\bin\Debug\net6.0\SuperGame.runtimeconfig.json
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\bin\Debug\net6.0\SuperGame.dll
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\bin\Debug\net6.0\SuperGame.pdb
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.csproj.AssemblyReference.cache
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.GeneratedMSBuildEditorConfig.editorconfig
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.AssemblyInfoInputs.cache
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.AssemblyInfo.cs
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.csproj.CoreCompileInputs.cache
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.dll
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\refint\SuperGame.dll
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.pdb
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\SuperGame.genruntimeconfig.cache
+D:\Everything\camp\SuperGame\SuperGame\SuperGame\obj\Debug\net6.0\ref\SuperGame.dll
