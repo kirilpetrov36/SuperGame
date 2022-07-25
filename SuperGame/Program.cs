@@ -260,12 +260,12 @@ static class Scene
                 Console.WriteLine($"1-st player Armor : {oldArmour} -> {firstPlayer.Armour} ");
             }
 
-            if (firstPlayer.Life <= 0 | ) {
+            if (firstPlayer.Life <= 0) {
                 Console.WriteLine();
                 Console.WriteLine("2-ND PLAYER HAS WON");
                 break; 
             }
-            if (secondPlayer.Life <= 0 | ) {
+            if (secondPlayer.Life <= 0) {
                 Console.WriteLine();
                 Console.WriteLine("1-ST PLAYER HAS WON");
                 break; 
